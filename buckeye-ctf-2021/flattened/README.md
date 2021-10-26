@@ -41,7 +41,14 @@ Qiling: `rcx` = 0
 
 Unrolled: `rcx` = 1 (only `mov` is executed, `loop` is a branching instruction so it was not included in unrolled assembly)
 
-
+Now that we have this building block, what about altering `rax`, `rcx`, and `rdi`, thus changing the syscall? We can use `imul` with `ecx` to our advantage. For example consider:
+```
+mov     rax,58
+imul    rax,rcx
+syscall
+inc     rax
+```
+There are no branching instructions but convince yourself that `rax` will be 59 on the unrolled executable and 1 on the Qiling executable.
 
 ### Final Assembly (shellcode)
 
