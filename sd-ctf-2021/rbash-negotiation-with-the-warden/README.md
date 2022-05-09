@@ -1,4 +1,4 @@
-# Rbash Negotiation with the warden
+# Rbash Negotiation with the Warden
 
 ## Overview
 
@@ -8,8 +8,8 @@
 #!/bin/sh
 /flag
 ```
-3) Chage permissions of `vuln`
-4) Exit jail with 7
+3) Chage permissions of `vuln` to 777 with 3
+4) Exit jail with 7, putting us into `rbash`
 5) Run `vuln.txt` to execute script and win
 
 ## Explanation
