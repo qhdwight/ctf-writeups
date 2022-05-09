@@ -1,7 +1,6 @@
 from pwn import *
 
 io = process('./horoscope')
-# io = gdb.debug('./horoscope', 'break *0x004007bc\ncontinue')
 # io = remote('horoscope.sdc.tf', 1337)
 io.recvuntil(b'very own horoscope\n')
 print(cyclic_find(b'aaoa'))

