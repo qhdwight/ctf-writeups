@@ -13,7 +13,7 @@ if __name__ == '__main__':
     elf = context.binary = ELF('./secureHoroscope')
 
     io = process()
-    # io = remote('sechoroscope.sdc.tf', 1337)
+    
     io.recvuntil(b'To get started, tell us how you feel\n')
     io.sendline(b'')
     io.recvuntil(b"we will have your very own horoscope\n\n")
